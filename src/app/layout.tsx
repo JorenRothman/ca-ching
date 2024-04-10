@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { TRPCReactProvider } from "@/trpc/react";
 
 export const metadata: Metadata = {
     title: "Ca Ching",
@@ -13,7 +14,9 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body>{children}</body>
+            <TRPCReactProvider>
+                <body>{children}</body>
+            </TRPCReactProvider>
         </html>
     );
 }
