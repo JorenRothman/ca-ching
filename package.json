@@ -1,36 +1,42 @@
 {
-  "name": "ca-ching",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev --turbo",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@t3-oss/env-nextjs": "^0.9.2",
-    "@tanstack/react-query": "^5.29.0",
-    "@trpc/client": "11.0.0-rc.334",
-    "@trpc/next": "11.0.0-rc.334",
-    "@trpc/react-query": "11.0.0-rc.334",
-    "@trpc/server": "11.0.0-rc.334",
-    "jiti": "^1.21.0",
-    "next": "14.1.4",
-    "react": "^18",
-    "react-dom": "^18",
-    "superjson": "^2.2.1",
-    "zod": "^3.22.4"
-  },
-  "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "autoprefixer": "^10.0.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.1.4",
-    "postcss": "^8",
-    "tailwindcss": "^3.3.0",
-    "typescript": "^5"
-  }
+    "name": "ca-ching",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev --turbo",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "drizzle:generate": "drizzle-kit generate:pg",
+        "drizzle:migrate": "pnpx tsx src/migrate.ts"
+    },
+    "dependencies": {
+        "@t3-oss/env-nextjs": "^0.9.2",
+        "@tanstack/react-query": "^5.29.0",
+        "@trpc/client": "11.0.0-rc.334",
+        "@trpc/next": "11.0.0-rc.334",
+        "@trpc/react-query": "11.0.0-rc.334",
+        "@trpc/server": "11.0.0-rc.334",
+        "dotenv": "^16.4.5",
+        "drizzle-kit": "^0.20.14",
+        "drizzle-orm": "^0.30.7",
+        "jiti": "^1.21.0",
+        "next": "14.1.4",
+        "postgres": "^3.4.4",
+        "react": "^18",
+        "react-dom": "^18",
+        "superjson": "^2.2.1",
+        "zod": "^3.22.4"
+    },
+    "devDependencies": {
+        "@types/node": "^20",
+        "@types/react": "^18",
+        "@types/react-dom": "^18",
+        "autoprefixer": "^10.0.1",
+        "eslint": "^8",
+        "eslint-config-next": "14.1.4",
+        "postcss": "^8",
+        "tailwindcss": "^3.3.0",
+        "typescript": "^5"
+    }
 }
