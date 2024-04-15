@@ -1,3 +1,4 @@
+import { DrizzlePostgreSQLAdapter } from "@lucia-auth/adapter-drizzle";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 
@@ -16,3 +17,9 @@ export const conn = globalForDb.conn ?? postgres(env.DATABASE_URL);
 if (env.NODE_ENV !== "production") globalForDb.conn = conn;
 
 export const db = drizzle(conn, { schema });
+
+export const adapter = new DrizzlePostgreSQLAdapter(
+    db,
+    schema.sessions,
+    schema.users
+);
