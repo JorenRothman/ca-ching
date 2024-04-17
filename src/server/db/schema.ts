@@ -1,12 +1,11 @@
 // Example model schema from the Drizzle docs
 // https://orm.drizzle.team/docs/sql-schema-declaration
 
-import { relations, sql } from "drizzle-orm";
+import { time } from "console";
+import { relations } from "drizzle-orm";
 import {
-    index,
     numeric,
     pgTableCreator,
-    serial,
     text,
     timestamp,
     varchar,
@@ -14,20 +13,38 @@ import {
 
 export const createTable = pgTableCreator((name) => name);
 
-export const posts = createTable(
-    "post",
-    {
-        id: serial("id").primaryKey(),
-        name: varchar("name", { length: 256 }),
-        createdAt: timestamp("created_at")
-            .default(sql`CURRENT_TIMESTAMP`)
-            .notNull(),
-        updatedAt: timestamp("updatedAt"),
-    },
-    (example) => ({
-        nameIndex: index("name_idx").on(example.name),
-    })
-);
+export const tasks = createTable("task", {
+    id: text("id").primaryKey(),
+    title: text("title").notNull(),
+    duration: numeric("duration"),
+    date: timestamp("date").defaultNow().notNull(),
+    userID: text("user_id")
+        .notNull()
+        .references(() => users.id),
+    clientID: text("client_id")
+        .notNull()
+        .references(() => client.id),
+});
+
+export const taskRelations = relations(tasks, ({ one }) => ({
+    client: one(client, {
+        fields: [tasks.clientID],
+        references: [client.id],
+    }),
+}));
+
+export const client = createTable("client", {
+    id: text("id").primaryKey(),
+    name: text("name").notNull(),
+});
+
+export const accessToken = createTable("access_token", {
+    id: text("id").primaryKey(),
+    token: text("token").notNull(),
+    userID: text("user_id")
+        .notNull()
+        .references(() => users.id),
+});
 
 export const users = createTable("user", {
     id: text("id").primaryKey(),
@@ -35,8 +52,10 @@ export const users = createTable("user", {
     username: varchar("username", { length: 24 }),
 });
 
-export const usersRelations = relations(users, ({ one }) => ({
+export const usersRelations = relations(users, ({ one, many }) => ({
     session: one(sessions),
+    accessToken: many(accessToken),
+    task: many(tasks),
 }));
 
 export const sessions = createTable("session", {
