@@ -1,3 +1,4 @@
+import Item from "@/components/task/item";
 import { api } from "@/trpc/server";
 
 export default async function Overview() {
@@ -8,14 +9,8 @@ export default async function Overview() {
             <div className="container mx-auto">
                 <h1 className="text-2xl mb-4">Completed Tasks</h1>
                 <div className="grid grid-cols-3 gap-8">
-                    {tasks.map(({ id, title, duration, client, date }) => {
-                        return (
-                            <div key={id} className="border border-black p-4">
-                                {title} - {duration} minutes -{" "}
-                                {client && `client ${client.name}`}
-                                <p>On: {date.toISOString()}</p>
-                            </div>
-                        );
+                    {tasks.map(({ id, ...rest }) => {
+                        return <Item key={id} id={id} {...rest} />;
                     })}
                 </div>
             </div>

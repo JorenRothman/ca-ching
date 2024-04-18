@@ -16,7 +16,7 @@ export const createTable = pgTableCreator((name) => name);
 export const tasks = createTable("task", {
     id: text("id").primaryKey(),
     title: text("title").notNull(),
-    duration: numeric("duration"),
+    duration: numeric("duration").notNull(),
     date: timestamp("date").defaultNow().notNull(),
     userID: text("user_id")
         .notNull()

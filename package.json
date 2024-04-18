@@ -19,6 +19,7 @@
         "@trpc/react-query": "11.0.0-rc.334",
         "@trpc/server": "11.0.0-rc.334",
         "arctic": "^1.5.0",
+        "clsx": "^2.1.0",
         "dotenv": "^16.4.5",
         "drizzle-kit": "^0.20.14",
         "drizzle-orm": "^0.30.8",
@@ -29,7 +30,9 @@
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-hook-form": "^7.51.3",
+        "sonner": "^1.4.41",
         "superjson": "^2.2.1",
+        "tailwind-merge": "^2.2.2",
         "zod": "^3.22.4"
     },
     "devDependencies": {
@@ -45,5 +48,6 @@
     },
     "volta": {
         "node": "20.12.2"
-    }
+    },
+    "packageManager": "pnpm@8.15.4+sha256.cea6d0bdf2de3a0549582da3983c70c92ffc577ff4410cbf190817ddc35137c2"
 }

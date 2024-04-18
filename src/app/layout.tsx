@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { TRPCReactProvider } from "@/trpc/react";
 import Link from "next/link";
+import Providers from "@/providers";
 
 export const metadata: Metadata = {
     title: "Ca Ching",
@@ -15,16 +16,18 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <TRPCReactProvider>
-                <body>
-                    <header className="p-4 flex gap-4">
-                        <Link href={"/"}>Complete</Link>
-                        <Link href="overview">Overview</Link>
-                        <Link href="login">Login</Link>
-                    </header>
-                    {children}
-                </body>
-            </TRPCReactProvider>
+            <body>
+                <TRPCReactProvider>
+                    <Providers>
+                        <header className="p-4 flex gap-4">
+                            <Link href={"/"}>Complete</Link>
+                            <Link href="overview">Overview</Link>
+                            <Link href="login">Login</Link>
+                        </header>
+                        {children}
+                    </Providers>
+                </TRPCReactProvider>
+            </body>
         </html>
     );
 }

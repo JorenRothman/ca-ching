@@ -1,9 +1,12 @@
 "use client";
 
+import Input from "@/components/ui/input";
+import { DEFAULT_ERROR_MESSAGE } from "@/messages";
 import { api } from "@/trpc/react";
 import { useRouter } from "next/navigation";
 
 import { useForm, SubmitHandler } from "react-hook-form";
+import { toast } from "sonner";
 
 type Inputs = {
     name: string;
@@ -11,7 +14,14 @@ type Inputs = {
     client: string;
 };
 
-export default function Form() {
+type Props = {
+    clients: {
+        id: string;
+        name: string;
+    }[];
+};
+
+export default function Form({ clients }: Props) {
     const router = useRouter();
     const {
         register,
@@ -24,6 +34,11 @@ export default function Form() {
         onSuccess: () => {
             router.refresh();
             reset();
+
+            toast("Success! Task added");
+        },
+        onError: () => {
+            toast(DEFAULT_ERROR_MESSAGE);
         },
     });
 
@@ -37,8 +52,7 @@ export default function Form() {
                 <h1 className="text-2xl mb-4">Complete Task</h1>
                 <label className="flex flex-col gap-2">
                     Name
-                    <input
-                        className="border border-black"
+                    <Input
                         type="text"
                         {...register("name", { required: true })}
                     />
@@ -46,8 +60,7 @@ export default function Form() {
                 </label>
                 <label className="flex flex-col gap-2">
                     Duration (in min)
-                    <input
-                        className="border border-black"
+                    <Input
                         type="number"
                         {...register("duration", { required: true })}
                     />
@@ -55,11 +68,16 @@ export default function Form() {
                 </label>
                 <label className="flex flex-col gap-2">
                     Client
-                    <input
+                    <select
                         className="border border-black"
-                        type="text"
                         {...register("client", { required: true })}
-                    />
+                    >
+                        {clients.map(({ id, name }) => (
+                            <option value={id} key={id}>
+                                {name}
+                            </option>
+                        ))}
+                    </select>
                     {errors.client && <span>This field is required</span>}
                 </label>
                 <button className="border border-black py-2" type="submit">
