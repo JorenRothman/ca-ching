@@ -1,5 +1,17 @@
 "use client";
 
+import {
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog";
+import Close from "@/icons/close";
+import EditIcon from "@/icons/edit";
 import { api } from "@/trpc/react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -14,13 +26,36 @@ type Props = {
     date: Date;
 };
 
+function Edit() {
+    return (
+        <Dialog>
+            <DialogTrigger>
+                <EditIcon />
+            </DialogTrigger>
+            <DialogContent>
+                <DialogHeader>
+                    <DialogTitle>Are you absolutely sure?</DialogTitle>
+                    <DialogDescription>
+                        This action cannot be undone. This will permanently
+                        delete your account and remove your data from our
+                        servers.
+                    </DialogDescription>
+                    <DialogFooter>
+                        <DialogClose>close</DialogClose>
+                    </DialogFooter>
+                </DialogHeader>
+            </DialogContent>
+        </Dialog>
+    );
+}
+
 export default function Item({ id, title, duration, client, date }: Props) {
     const router = useRouter();
 
     const remove = api.task.delete.useMutation({
         onSuccess: () => {
             router.refresh();
-            toast("Success, task delete!");
+            toast("Success, task delete!", {});
         },
     });
 
@@ -30,22 +65,12 @@ export default function Item({ id, title, duration, client, date }: Props) {
 
     return (
         <div className="border border-black p-4 flex flex-col">
-            <button className="mb-4" onClick={handleRemove}>
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    className="size-6"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                    />
-                </svg>
-            </button>
+            <div className="flex gap-4 mb-4">
+                <button onClick={handleRemove}>
+                    <Close />
+                </button>
+                <Edit />
+            </div>
             {client && <h3 className="italic">{client.name}</h3>}
             <h2 className="text-lg">{title}</h2>
             <p>{duration} minutes</p>
