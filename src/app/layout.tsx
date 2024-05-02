@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { TRPCReactProvider } from "@/trpc/react";
-import Link from "next/link";
 import Providers from "@/providers";
+import SiteHeader from "@/components/ui/siteHeader";
 
 export const metadata: Metadata = {
     title: "Ca Ching",
     description: "A simple budgeting app",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
@@ -19,11 +19,7 @@ export default function RootLayout({
             <body>
                 <TRPCReactProvider>
                     <Providers>
-                        <header className="p-4 flex gap-4">
-                            <Link href={"/"}>Complete</Link>
-                            <Link href="overview">Overview</Link>
-                            <Link href="login">Login</Link>
-                        </header>
+                        <SiteHeader />
                         {children}
                     </Providers>
                 </TRPCReactProvider>

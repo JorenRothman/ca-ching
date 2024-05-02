@@ -1,7 +1,15 @@
 import Item from "@/components/task/item";
+import { validateRequest } from "@/server/auth/validate";
 import { api } from "@/trpc/server";
+import { redirect } from "next/navigation";
 
 export default async function Overview() {
+    const { user } = await validateRequest();
+
+    if (!user) {
+        redirect("/login");
+    }
+
     const tasks = await api.task.all();
 
     return (
