@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 import { db } from "@/server/db/db";
-import { tasks } from "@/server/db/schema";
+import { tasks, users } from "@/server/db/schema";
 import { validateRequest } from "@/server/auth/validate";
 import { generateId } from "lucia";
 import { eq } from "drizzle-orm";
@@ -18,16 +18,19 @@ const deleteSchema = z.object({
 });
 
 export const taskRouter = createTRPCRouter({
-    all: publicProcedure.query(async () => {
-        return await db.query.tasks.findMany({
-            with: {
-                client: true,
-            },
-            orderBy(fields, { desc }) {
-                return [desc(fields.date)];
-            },
-        });
-    }),
+    all: publicProcedure
+        .input(z.object({ userID: z.string() }))
+        .query(async (opts) => {
+            return await db.query.tasks.findMany({
+                with: {
+                    client: true,
+                },
+                orderBy(fields, { desc }) {
+                    return [desc(fields.date)];
+                },
+                where: eq(tasks.userID, opts.input.userID),
+            });
+        }),
     create: publicProcedure.input(createSchema).mutation(async ({ input }) => {
         const { user } = await validateRequest();
 
