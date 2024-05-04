@@ -40,6 +40,7 @@ import Sidebar from "@/app/admin/_components/sidebar";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { validateRequest } from "@/server/auth/validate";
 import { logout } from "@/server/auth/logout";
+import DashboardTitle from "@/app/admin/_components/dashboardTitle";
 
 export default async function RootLayout({
     children,
@@ -83,6 +84,8 @@ export default async function RootLayout({
                             </nav>
                         </SheetContent>
                     </Sheet>
+
+                    <DashboardTitle />
 
                     <DropdownMenu>
                         <DropdownMenuTrigger className="ml-auto" asChild>
