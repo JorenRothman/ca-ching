@@ -77,20 +77,22 @@ export default function Sidebar() {
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Link
-                                href="/admin/api-keys"
+                                href="/admin/access-token"
                                 className={cn(
                                     "flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8",
                                     {
                                         "bg-accent text-accent-foreground":
-                                            pathname === "/api-keys",
+                                            pathname === "/access-token",
                                     }
                                 )}
                             >
                                 <LockOpen className="h-5 w-5" />
-                                <span className="sr-only">API Keys</span>
+                                <span className="sr-only">Access Tokens</span>
                             </Link>
                         </TooltipTrigger>
-                        <TooltipContent side="right">API Keys</TooltipContent>
+                        <TooltipContent side="right">
+                            Access Tokens
+                        </TooltipContent>
                     </Tooltip>
                 </TooltipProvider>
             </nav>

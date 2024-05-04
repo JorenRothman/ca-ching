@@ -1,5 +1,4 @@
-import { validateRequest, validateRequestPage } from "@/server/auth/validate";
-import { redirect } from "next/navigation";
+import { validateRequestPage } from "@/server/auth/validate";
 import AddClientForm from "@/app/admin/clients/_components/addClientForm";
 
 export default async function Home() {

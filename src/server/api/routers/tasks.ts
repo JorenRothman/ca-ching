@@ -9,8 +9,9 @@ import { eq } from "drizzle-orm";
 
 const createSchema = z.object({
     name: z.string(),
-    duration: z.string(),
+    duration: z.string().max(3),
     client: z.string(),
+    accessToken: z.string().optional(),
 });
 
 const deleteSchema = z.object({
@@ -32,7 +33,7 @@ export const taskRouter = createTRPCRouter({
             });
         }),
     create: publicProcedure.input(createSchema).mutation(async ({ input }) => {
-        const { user } = await validateRequest();
+        const { user } = await validateRequest(input.accessToken);
 
         if (!user) {
             throw new Error("Not auth");

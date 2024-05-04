@@ -11,5 +11,3 @@ export const env = createEnv({
     client: {},
     experimental__runtimeEnv: {},
 });
-
-console.log(env.DATABASE_URL);

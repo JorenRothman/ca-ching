@@ -41,6 +41,7 @@ export const client = createTable("client", {
 export const accessToken = createTable("access_token", {
     id: text("id").primaryKey(),
     token: text("token").notNull(),
+    createdAt: timestamp("date").defaultNow().notNull(),
     userID: text("user_id")
         .notNull()
         .references(() => users.id),

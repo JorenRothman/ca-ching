@@ -4,11 +4,35 @@ import { cache } from "react";
 import type { Session, User } from "lucia";
 import { lucia } from "@/server/auth/auth";
 import { redirect } from "next/navigation";
+import { verifyJWT } from "@/lib/jwt";
+import type { AccessTokenPayload } from "@/server/api/routers/accessToken";
 
 export const validateRequest = cache(
-    async (): Promise<
+    async (
+        accessToken = ""
+    ): Promise<
         { user: User; session: Session } | { user: null; session: null }
     > => {
+        if (accessToken) {
+            const { payload } = await verifyJWT<AccessTokenPayload>(
+                accessToken
+            );
+
+            return {
+                user: {
+                    id: payload.userID,
+                    githubId: 102,
+                    username: "care",
+                },
+                session: {
+                    expiresAt: new Date(),
+                    fresh: true,
+                    id: "123",
+                    userId: payload.userID,
+                },
+            };
+        }
+
         const sessionId = cookies().get(lucia.sessionCookieName)?.value ?? null;
         if (!sessionId) {
             return {
