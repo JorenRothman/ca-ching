@@ -6,8 +6,6 @@ const jiti = createJiti(fileURLToPath(import.meta.url));
 jiti("./src/env.ts");
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-    output: "standalone",
-};
+const nextConfig = {};
 
 export default nextConfig;
