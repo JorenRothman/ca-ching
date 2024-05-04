@@ -23,7 +23,7 @@ export default function Sidebar() {
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Link
-                                href="/"
+                                href="/admin"
                                 className={cn(
                                     "flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8",
                                     {
@@ -41,7 +41,7 @@ export default function Sidebar() {
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Link
-                                href="/tasks"
+                                href="/admin/tasks"
                                 className={cn(
                                     "flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8",
                                     {
@@ -59,7 +59,7 @@ export default function Sidebar() {
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Link
-                                href="/clients"
+                                href="/admin/clients"
                                 className={cn(
                                     "flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8",
                                     {
@@ -77,7 +77,7 @@ export default function Sidebar() {
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Link
-                                href="/api-keys"
+                                href="/admin/api-keys"
                                 className={cn(
                                     "flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8",
                                     {
