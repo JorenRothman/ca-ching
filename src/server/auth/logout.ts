@@ -1,3 +1,5 @@
+"use server";
+
 import { lucia } from "@/server/auth/auth";
 import { validateRequest } from "@/server/auth/validate";
 import { cookies } from "next/headers";
