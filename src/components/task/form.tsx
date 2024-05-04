@@ -1,12 +1,40 @@
 "use client";
 
-import Input from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 import { DEFAULT_ERROR_MESSAGE } from "@/messages";
 import { api } from "@/trpc/react";
 import { useRouter } from "next/navigation";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
+
+import { z } from "zod";
+import {
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import Link from "next/link";
+
+const formSchema = z.object({
+    name: z.string().min(2).max(50),
+    duration: z.string(),
+    client: z.string(),
+});
 
 type Inputs = {
     name: string;
@@ -21,19 +49,21 @@ type Props = {
     }[];
 };
 
-export default function Form({ clients }: Props) {
+export default function AddTaskForm({ clients }: Props) {
     const router = useRouter();
-    const {
-        register,
-        handleSubmit,
-        reset,
-        formState: { errors },
-    } = useForm<Inputs>();
+
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            name: "",
+            duration: "",
+        },
+    });
 
     const taskMutation = api.task.create.useMutation({
         onSuccess: () => {
             router.refresh();
-            reset();
+            form.reset();
 
             toast("Success! Task added");
         },
@@ -42,48 +72,94 @@ export default function Form({ clients }: Props) {
         },
     });
 
-    const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    async function onSubmit(data: z.infer<typeof formSchema>) {
         await taskMutation.mutate(data);
-    };
+    }
 
     return (
-        <div onSubmit={handleSubmit(onSubmit)} className="container mx-auto">
-            <form className="flex flex-col gap-4 border border-black p-8 pt-6">
-                <h1 className="text-2xl mb-4">Complete Task</h1>
-                <label className="flex flex-col gap-2">
-                    Name
-                    <Input
-                        type="text"
-                        {...register("name", { required: true })}
-                    />
-                    {errors.name && <span>This field is required</span>}
-                </label>
-                <label className="flex flex-col gap-2">
-                    Duration (in min)
-                    <Input
-                        type="number"
-                        {...register("duration", { required: true })}
-                    />
-                    {errors.duration && <span>This field is required</span>}
-                </label>
-                <label className="flex flex-col gap-2">
-                    Client
-                    <select
-                        className="border border-black"
-                        {...register("client", { required: true })}
+        <Card>
+            <CardHeader>Add Task</CardHeader>
+            <CardContent>
+                <Form {...form}>
+                    <form
+                        onSubmit={form.handleSubmit(onSubmit)}
+                        className="space-y-8"
                     >
-                        {clients.map(({ id, name }) => (
-                            <option value={id} key={id}>
-                                {name}
-                            </option>
-                        ))}
-                    </select>
-                    {errors.client && <span>This field is required</span>}
-                </label>
-                <button className="border border-black py-2" type="submit">
-                    Submit
-                </button>
-            </form>
-        </div>
+                        <FormField
+                            control={form.control}
+                            name="name"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Task name</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            placeholder="Took an 💩"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormDescription>
+                                        Description or name of the task
+                                        completed
+                                    </FormDescription>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+
+                        <FormField
+                            control={form.control}
+                            name="duration"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Duration</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="60" {...field} />
+                                    </FormControl>
+                                    <FormDescription>
+                                        Time taken to complete task
+                                    </FormDescription>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="client"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Client</FormLabel>
+                                    <Select
+                                        onValueChange={field.onChange}
+                                        defaultValue={field.value}
+                                    >
+                                        <FormControl>
+                                            <SelectTrigger>
+                                                <SelectValue placeholder="Select an client" />
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                            {clients.map(({ id, name }) => (
+                                                <SelectItem key={id} value={id}>
+                                                    {name}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+                                    <FormDescription>
+                                        You can manage email addresses in your{" "}
+                                        <Link href="/examples/forms">
+                                            email settings
+                                        </Link>
+                                        .
+                                    </FormDescription>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <Button type="submit">Submit</Button>
+                    </form>
+                </Form>
+            </CardContent>
+        </Card>
     );
 }

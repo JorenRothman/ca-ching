@@ -13,10 +13,5 @@ export default async function Home() {
 
     const clients = await api.client.all();
 
-    return (
-        <main className="my-12 grid gap-8">
-            <TaskForm clients={clients} />
-            <ClientForm />
-        </main>
-    );
+    return <TaskForm clients={clients} />;
 }

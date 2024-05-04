@@ -33,8 +33,6 @@ export const columns: ColumnDef<Task>[] = [
         cell: ({ row }) => {
             const date: Date = row.getValue("date");
 
-            console.log(date);
-
             return <div>{date.toLocaleDateString("nl-NL")}</div>;
         },
     },
