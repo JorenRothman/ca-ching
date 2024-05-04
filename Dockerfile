@@ -62,6 +62,16 @@ EXPOSE 3000
 
 ENV PORT 3000
 
+ARG DATABASE_URL
+ENV DATABASE_URL ${DATABASE_URL}
+
+ARG GITHUB_CLIENT_ID
+ENV GITHUB_CLIENT_ID ${GITHUB_CLIENT_ID}
+
+ARG GITHUB_CLIENT_SECRET
+ENV GITHUB_CLIENT_SECRET ${GITHUB_CLIENT_SECRET}
+
+
 # server.js is created by next build from the standalone output
 # https://nextjs.org/docs/pages/api-reference/next-config-js/output
 CMD HOSTNAME="0.0.0.0" node server.js
