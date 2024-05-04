@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     title: "Ca Ching",
     description: "A simple budgeting app",
 };
-import Sidebar from "@/app/(admin)/_components/sidebar";
+import Sidebar from "@/app/admin/_components/sidebar";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { validateRequest } from "@/server/auth/validate";
 import { logout } from "@/server/auth/logout";

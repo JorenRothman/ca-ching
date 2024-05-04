@@ -1,9 +1,9 @@
-import TaskForm from "@/app/(admin)/tasks/_components/addTaskForm";
+import TaskForm from "@/app/admin/tasks/_components/addTaskForm";
 import { validateRequestPage } from "@/server/auth/validate";
 import { redirect } from "next/navigation";
 import { api } from "@/trpc/server";
-import { DataTable } from "@/app/(admin)/tasks/_components/data-table";
-import { columns } from "@/app/(admin)/tasks/_components/columns";
+import { DataTable } from "@/app/admin/tasks/_components/data-table";
+import { columns } from "@/app/admin/tasks/_components/columns";
 
 export default async function Home() {
     const { user } = await validateRequestPage();
