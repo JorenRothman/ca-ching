@@ -27,7 +27,7 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 
 const formSchema = z.object({
@@ -35,12 +35,6 @@ const formSchema = z.object({
     duration: z.string(),
     client: z.string(),
 });
-
-type Inputs = {
-    name: string;
-    duration: string;
-    client: string;
-};
 
 type Props = {
     clients: {
@@ -67,8 +61,8 @@ export default function AddTaskForm({ clients }: Props) {
 
             toast("Success! Task added");
         },
-        onError: () => {
-            toast(DEFAULT_ERROR_MESSAGE);
+        onError: (error) => {
+            toast(error.message);
         },
     });
 
@@ -78,7 +72,9 @@ export default function AddTaskForm({ clients }: Props) {
 
     return (
         <Card>
-            <CardHeader>Add Task</CardHeader>
+            <CardHeader>
+                <CardTitle className="text-2xl">Add Task</CardTitle>
+            </CardHeader>
             <CardContent>
                 <Form {...form}>
                     <form
@@ -90,16 +86,16 @@ export default function AddTaskForm({ clients }: Props) {
                             name="name"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Task name</FormLabel>
+                                    <FormLabel>Name</FormLabel>
                                     <FormControl>
                                         <Input
-                                            placeholder="Took an 💩"
+                                            placeholder="Operation Thunderclap"
                                             {...field}
                                         />
                                     </FormControl>
                                     <FormDescription>
-                                        Description or name of the task
-                                        completed
+                                        Description or name of the completed
+                                        task
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
@@ -116,7 +112,7 @@ export default function AddTaskForm({ clients }: Props) {
                                         <Input placeholder="60" {...field} />
                                     </FormControl>
                                     <FormDescription>
-                                        Time taken to complete task
+                                        Time spent to complete task
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
@@ -146,11 +142,13 @@ export default function AddTaskForm({ clients }: Props) {
                                         </SelectContent>
                                     </Select>
                                     <FormDescription>
-                                        You can manage email addresses in your{" "}
-                                        <Link href="/examples/forms">
-                                            email settings
+                                        Can&apos;t find a client{" "}
+                                        <Link
+                                            href="/clients"
+                                            className="underline"
+                                        >
+                                            create one!
                                         </Link>
-                                        .
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>

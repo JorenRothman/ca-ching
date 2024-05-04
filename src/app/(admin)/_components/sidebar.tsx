@@ -1,6 +1,6 @@
 "use client";
 
-import { Settings, CircleCheck, GanttChart, User2 } from "lucide-react";
+import { Settings, CircleCheck, Handshake, LockOpen } from "lucide-react";
 
 import {
     Tooltip,
@@ -11,6 +11,7 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { DashboardIcon } from "@radix-ui/react-icons";
 
 export default function Sidebar() {
     const pathname = usePathname();
@@ -31,11 +32,29 @@ export default function Sidebar() {
                                     }
                                 )}
                             >
-                                <CircleCheck className="h-5 w-5" />
-                                <span className="sr-only">Task</span>
+                                <DashboardIcon className="h-5 w-5" />
+                                <span className="sr-only">Dashboard</span>
                             </Link>
                         </TooltipTrigger>
-                        <TooltipContent side="right">Task</TooltipContent>
+                        <TooltipContent side="right">Dashboard</TooltipContent>
+                    </Tooltip>
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <Link
+                                href="/tasks"
+                                className={cn(
+                                    "flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8",
+                                    {
+                                        "bg-accent text-accent-foreground":
+                                            pathname === "/tasks",
+                                    }
+                                )}
+                            >
+                                <CircleCheck className="h-5 w-5" />
+                                <span className="sr-only">Tasks</span>
+                            </Link>
+                        </TooltipTrigger>
+                        <TooltipContent side="right">Tasks</TooltipContent>
                     </Tooltip>
                     <Tooltip>
                         <TooltipTrigger asChild>
@@ -49,7 +68,7 @@ export default function Sidebar() {
                                     }
                                 )}
                             >
-                                <User2 className="h-5 w-5" />
+                                <Handshake className="h-5 w-5" />
                                 <span className="sr-only">Clients</span>
                             </Link>
                         </TooltipTrigger>
@@ -58,20 +77,20 @@ export default function Sidebar() {
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Link
-                                href="/overview"
+                                href="/api-keys"
                                 className={cn(
                                     "flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8",
                                     {
                                         "bg-accent text-accent-foreground":
-                                            pathname === "/overview",
+                                            pathname === "/api-keys",
                                     }
                                 )}
                             >
-                                <GanttChart className="h-5 w-5" />
-                                <span className="sr-only">Overview</span>
+                                <LockOpen className="h-5 w-5" />
+                                <span className="sr-only">API Keys</span>
                             </Link>
                         </TooltipTrigger>
-                        <TooltipContent side="right">Overview</TooltipContent>
+                        <TooltipContent side="right">API Keys</TooltipContent>
                     </Tooltip>
                 </TooltipProvider>
             </nav>

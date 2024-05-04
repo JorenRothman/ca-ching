@@ -46,7 +46,7 @@ export default async function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    // const { user } = await validateRequest();
+    const { user } = await validateRequest();
 
     return (
         <div className="flex min-h-screen w-full flex-col bg-muted/40">

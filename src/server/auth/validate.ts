@@ -3,6 +3,7 @@ import { cache } from "react";
 
 import type { Session, User } from "lucia";
 import { lucia } from "@/server/auth/auth";
+import { redirect } from "next/navigation";
 
 export const validateRequest = cache(
     async (): Promise<
@@ -42,3 +43,13 @@ export const validateRequest = cache(
         return result;
     }
 );
+
+export const validateRequestPage = async () => {
+    const session = await validateRequest();
+
+    if (!session.user) {
+        return redirect("/login");
+    }
+
+    return session;
+};
