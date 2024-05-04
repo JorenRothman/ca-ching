@@ -1,9 +1,5 @@
 import { createEnv } from "@t3-oss/env-nextjs";
 import { z } from "zod";
-import { loadEnvConfig } from "@next/env";
-
-const projectDir = process.cwd();
-loadEnvConfig(projectDir);
 
 export const env = createEnv({
     server: {
@@ -15,3 +11,5 @@ export const env = createEnv({
     client: {},
     experimental__runtimeEnv: {},
 });
+
+console.log(env.DATABASE_URL);
