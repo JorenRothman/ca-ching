@@ -11,6 +11,10 @@ const createSchema = z.object({
     name: z.string(),
 });
 
+const deleteSchema = z.object({
+    id: z.string(),
+});
+
 export const clientRouter = createTRPCRouter({
     all: publicProcedure.query(async () => {
         return await db.query.client.findMany();
@@ -36,5 +40,19 @@ export const clientRouter = createTRPCRouter({
             id,
             name: input.name.toLowerCase(),
         });
+    }),
+    delete: publicProcedure.input(deleteSchema).mutation(async ({ input }) => {
+        const { user } = await validateRequest();
+
+        if (!user) {
+            throw new Error("Not auth");
+        }
+
+        const deletedClients = await db
+            .delete(client)
+            .where(eq(client.id, input.id))
+            .returning();
+
+        return { clients: deletedClients };
     }),
 });
