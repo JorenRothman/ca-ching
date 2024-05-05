@@ -7,7 +7,7 @@ import { ColumnDef } from "@tanstack/react-table";
 export type Task = {
     id: string;
     title: string;
-    duration: string;
+    duration: number;
     date: Date;
     client: {
         name: string;

@@ -12,7 +12,7 @@ export default async function Page() {
     });
 
     const minutesTracked = tasks.reduce(
-        (prev, current) => prev + Number.parseInt(current.duration),
+        (prev, current) => prev + current.duration,
         0
     );
 

@@ -9,12 +9,11 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { DEFAULT_ERROR_MESSAGE } from "@/messages";
 import { api } from "@/trpc/react";
 import { useRouter } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import { z } from "zod";
@@ -29,12 +28,8 @@ import {
 } from "@/components/ui/form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
-
-const formSchema = z.object({
-    name: z.string().min(2).max(50),
-    duration: z.string(),
-    client: z.string(),
-});
+import { createTaskSchema } from "@/shared/schemas/task";
+import type { MouseEvent } from "react";
 
 type Props = {
     clients: {
@@ -46,11 +41,11 @@ type Props = {
 export default function AddTaskForm({ clients }: Props) {
     const router = useRouter();
 
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<z.infer<typeof createTaskSchema>>({
+        resolver: zodResolver(createTaskSchema),
         defaultValues: {
             name: "",
-            duration: "",
+            duration: 30,
         },
     });
 
@@ -66,8 +61,13 @@ export default function AddTaskForm({ clients }: Props) {
         },
     });
 
-    async function onSubmit(data: z.infer<typeof formSchema>) {
+    async function onSubmit(data: z.infer<typeof createTaskSchema>) {
         await taskMutation.mutate(data);
+    }
+
+    function setQuickTimes(event: MouseEvent<HTMLButtonElement>, time: number) {
+        event.preventDefault();
+        form.setValue("duration", time);
     }
 
     return (
@@ -107,12 +107,53 @@ export default function AddTaskForm({ clients }: Props) {
                             name="duration"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Duration</FormLabel>
+                                    <FormLabel>Time spent in minutes</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="60" {...field} />
+                                        <Input
+                                            type="number"
+                                            placeholder="60"
+                                            {...field}
+                                        />
                                     </FormControl>
                                     <FormDescription>
-                                        Time spent to complete task
+                                        <span className="flex flex-wrap mt-4 gap-2">
+                                            <Button
+                                                onClick={(e) =>
+                                                    setQuickTimes(e, 15)
+                                                }
+                                                variant={"outline"}
+                                                size={"sm"}
+                                            >
+                                                15 Min
+                                            </Button>
+                                            <Button
+                                                onClick={(e) =>
+                                                    setQuickTimes(e, 30)
+                                                }
+                                                variant={"outline"}
+                                                size={"sm"}
+                                            >
+                                                30 Min
+                                            </Button>
+                                            <Button
+                                                onClick={(e) =>
+                                                    setQuickTimes(e, 60)
+                                                }
+                                                variant={"outline"}
+                                                size={"sm"}
+                                            >
+                                                1 Hour
+                                            </Button>
+                                            <Button
+                                                onClick={(e) =>
+                                                    setQuickTimes(e, 120)
+                                                }
+                                                variant={"outline"}
+                                                size={"sm"}
+                                            >
+                                                2 Hours
+                                            </Button>
+                                        </span>
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
