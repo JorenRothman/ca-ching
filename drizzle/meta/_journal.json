@@ -43,6 +43,13 @@
       "when": 1714900591112,
       "tag": "0005_big_black_crow",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1714911446755,
+      "tag": "0006_unique_imperial_guard",
+      "breakpoints": true
     }
   ]
 }

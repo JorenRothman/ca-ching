@@ -35,7 +35,7 @@ export const taskRelations = relations(tasks, ({ one }) => ({
 
 export const client = createTable("client", {
     id: text("id").primaryKey(),
-    name: text("name").notNull(),
+    name: text("name").notNull().unique(),
 });
 
 export const accessToken = createTable("access_token", {
