@@ -6,6 +6,7 @@ import { conn, db } from "@/server/db/db";
     await migrate(db, { migrationsFolder: "./drizzle" });
 
     conn.end();
+    console.log("migration finished!");
 })();
 
 // Don't forget to close the connection, otherwise the script will hang
