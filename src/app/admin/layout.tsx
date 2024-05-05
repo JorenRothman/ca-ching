@@ -12,6 +12,8 @@ import {
     CircleCheck,
     GanttChart,
     User2,
+    Handshake,
+    LockOpen,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -41,6 +43,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { validateRequest } from "@/server/auth/validate";
 import { logout } from "@/server/auth/logout";
 import DashboardTitle from "@/app/admin/_components/dashboardTitle";
+import { DashboardIcon } from "@radix-ui/react-icons";
 
 export default async function RootLayout({
     children,
@@ -68,18 +71,32 @@ export default async function RootLayout({
                         <SheetContent side="left" className="sm:max-w-xs">
                             <nav className="grid gap-6 text-lg font-medium">
                                 <Link
-                                    href="/"
+                                    href="/admin"
+                                    className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                                >
+                                    <DashboardIcon className="h-5 w-5" />
+                                    Dashboard
+                                </Link>
+                                <Link
+                                    href="/admin/tasks"
                                     className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                                 >
                                     <CircleCheck className="h-5 w-5" />
-                                    Task
+                                    Tasks
                                 </Link>
                                 <Link
-                                    href="/overview"
+                                    href="/admin/clients"
                                     className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                                 >
-                                    <GanttChart className="h-5 w-5" />
-                                    Overview
+                                    <Handshake className="h-5 w-5" />
+                                    Clients
+                                </Link>
+                                <Link
+                                    href="/admin"
+                                    className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                                >
+                                    <LockOpen className="h-5 w-5" />
+                                    Access Tokens
                                 </Link>
                             </nav>
                         </SheetContent>
