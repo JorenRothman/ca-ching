@@ -46,10 +46,10 @@ export default async function Page() {
                     </CardHeader>
                     <CardContent className="flex gap-4 flex-wrap">
                         <Button size={"lg"} variant="secondary" asChild>
-                            <Link href="/tasks">Complete Task</Link>
+                            <Link href="/admin/tasks">Complete Task</Link>
                         </Button>
                         <Button size={"lg"} variant="secondary" asChild>
-                            <Link href="/tasks">View Tasks</Link>
+                            <Link href="/admin/tasks">View Tasks</Link>
                         </Button>
                     </CardContent>
                 </Card>
