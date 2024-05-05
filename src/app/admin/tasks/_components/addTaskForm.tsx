@@ -185,7 +185,7 @@ export default function AddTaskForm({ clients }: Props) {
                                     <FormDescription>
                                         Can&apos;t find a client{" "}
                                         <Link
-                                            href="/clients"
+                                            href="/admin/clients"
                                             className="underline"
                                         >
                                             create one!
