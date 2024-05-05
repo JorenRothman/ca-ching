@@ -54,10 +54,10 @@ export default function AddTaskForm({ clients }: Props) {
             router.refresh();
             form.reset();
 
-            toast("Success! Task added");
+            toast.success("Task added");
         },
-        onError: (error) => {
-            toast(error.message);
+        onError: ({ message }) => {
+            toast.error(message);
         },
     });
 
