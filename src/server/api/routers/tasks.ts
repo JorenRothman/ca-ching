@@ -6,14 +6,7 @@ import { tasks, users } from "@/server/db/schema";
 import { validateRequest } from "@/server/auth/validate";
 import { generateId } from "lucia";
 import { eq } from "drizzle-orm";
-
-const createSchema = z.object({
-    name: z.string(),
-    duration: z.string().max(3),
-    client: z.string(),
-    accessToken: z.string().optional(),
-});
-
+import { createTaskSchema } from "@/shared/schemas/task";
 const deleteSchema = z.object({
     id: z.string(),
 });
@@ -32,23 +25,25 @@ export const taskRouter = createTRPCRouter({
                 where: eq(tasks.userID, opts.input.userID),
             });
         }),
-    create: publicProcedure.input(createSchema).mutation(async ({ input }) => {
-        const { user } = await validateRequest(input.accessToken);
+    create: publicProcedure
+        .input(createTaskSchema)
+        .mutation(async ({ input }) => {
+            const { user } = await validateRequest(input.accessToken);
 
-        if (!user) {
-            throw new Error("Not auth");
-        }
+            if (!user) {
+                throw new Error("Not auth");
+            }
 
-        const taskID = generateId(16);
+            const taskID = generateId(16);
 
-        await db.insert(tasks).values({
-            id: taskID,
-            userID: user.id,
-            title: input.name,
-            duration: input.duration,
-            clientID: input.client,
-        });
-    }),
+            await db.insert(tasks).values({
+                id: taskID,
+                userID: user.id,
+                title: input.name,
+                duration: input.duration,
+                clientID: input.client,
+            });
+        }),
     delete: publicProcedure.input(deleteSchema).mutation(async ({ input }) => {
         const { user } = await validateRequest();
 

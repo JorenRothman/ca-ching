@@ -1,0 +1,1 @@
+ALTER TABLE "task" ALTER COLUMN "duration" SET DATA TYPE integer;
