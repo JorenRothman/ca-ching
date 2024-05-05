@@ -47,9 +47,11 @@ export const columns: ColumnDef<AccessToken>[] = [
             const mutation = api.accessToken.delete.useMutation({
                 onSuccess: () => {
                     router.refresh();
-                    toast("Access Token successfully deleted!");
+                    toast.success("Access Token deleted!");
                 },
-                onError: ({ message }) => {},
+                onError: ({ message }) => {
+                    toast.error(message);
+                },
             });
 
             return (

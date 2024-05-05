@@ -46,7 +46,7 @@ export default function AddClientForm() {
             router.refresh();
             form.reset();
 
-            toast("Success! Client added");
+            toast.success("Client added");
         },
         onError: (error) => {
             toast(error.message);

@@ -32,7 +32,7 @@ export default function GenerateForm() {
             setIsOpen(true);
         },
         onError: ({ message }) => {
-            toast(message);
+            toast.error(message);
         },
     });
 
@@ -42,7 +42,7 @@ export default function GenerateForm() {
 
     async function copyToClipboard() {
         await navigator.clipboard.writeText(token);
-        toast("Access Token copied");
+        toast.success("Access Token copied");
     }
 
     function onOpenChange(value: boolean) {
