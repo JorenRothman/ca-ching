@@ -28,7 +28,7 @@ export default function Sidebar() {
                                     "flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8",
                                     {
                                         "bg-accent text-accent-foreground":
-                                            pathname === "/",
+                                            pathname === "/admin",
                                     }
                                 )}
                             >
@@ -46,7 +46,7 @@ export default function Sidebar() {
                                     "flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8",
                                     {
                                         "bg-accent text-accent-foreground":
-                                            pathname === "/tasks",
+                                            pathname === "/admin/tasks",
                                     }
                                 )}
                             >
@@ -64,7 +64,7 @@ export default function Sidebar() {
                                     "flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8",
                                     {
                                         "bg-accent text-accent-foreground":
-                                            pathname === "/clients",
+                                            pathname === "/admin/clients",
                                     }
                                 )}
                             >
@@ -82,7 +82,7 @@ export default function Sidebar() {
                                     "flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8",
                                     {
                                         "bg-accent text-accent-foreground":
-                                            pathname === "/access-token",
+                                            pathname === "/admin/access-token",
                                     }
                                 )}
                             >
