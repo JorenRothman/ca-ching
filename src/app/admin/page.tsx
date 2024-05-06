@@ -11,6 +11,8 @@ export default async function Page() {
         userID: user.id,
     });
 
+    const clients = await api.client.all();
+
     const minutesTracked = tasks.reduce(
         (prev, current) => prev + current.duration,
         0
@@ -35,6 +37,13 @@ export default async function Page() {
                             {minutesTracked}{" "}
                             <span className="text-sm text-muted-foreground">
                                 Minutes Tracked
+                            </span>
+                        </p>
+
+                        <p className="text-2xl flex gap-3 leading-none flex-col">
+                            {clients.length}{" "}
+                            <span className="text-sm text-muted-foreground">
+                                Clients Added
                             </span>
                         </p>
                     </CardContent>

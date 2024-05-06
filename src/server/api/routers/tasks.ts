@@ -7,6 +7,7 @@ import { validateRequest } from "@/server/auth/validate";
 import { generateId } from "lucia";
 import { eq } from "drizzle-orm";
 import { createTaskSchema } from "@/shared/schemas/task";
+
 const deleteSchema = z.object({
     id: z.string(),
 });
@@ -36,14 +37,18 @@ export const taskRouter = createTRPCRouter({
 
             const taskID = generateId(16);
 
-            await db.insert(tasks).values({
-                id: taskID,
-                userID: user.id,
-                title: input.name,
-                duration: input.duration,
-                clientID: input.client,
-            });
+            return await db
+                .insert(tasks)
+                .values({
+                    id: taskID,
+                    userID: user.id,
+                    title: input.name,
+                    duration: input.duration,
+                    clientID: input.client,
+                })
+                .returning();
         }),
+
     delete: publicProcedure.input(deleteSchema).mutation(async ({ input }) => {
         const { user } = await validateRequest();
 

@@ -12,14 +12,42 @@ export async function POST(request: Request) {
 
     if (input.error) {
         return Response.json(
-            { status: "not ok" },
+            { message: input.error.issues },
             {
                 status: 500,
             }
         );
     }
 
-    await api.task.create({ ...input.data, accessToken: token });
+    let client = await api.client.findByName({
+        name: input.data.client,
+    });
 
-    return Response.json({ status: "ok" });
+    if (!client) {
+        client = (
+            await api.client.create({
+                name: input.data.client,
+                accessToken: token,
+            })
+        ).shift();
+    }
+
+    if (!client) {
+        return Response.json(
+            {
+                message: "Something went wrong",
+            },
+            {
+                status: 500,
+            }
+        );
+    }
+
+    const task = await api.task.create({
+        ...input.data,
+        client: client.id,
+        accessToken: token,
+    });
+
+    return Response.json({ task });
 }

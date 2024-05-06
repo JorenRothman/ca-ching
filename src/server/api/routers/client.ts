@@ -5,9 +5,18 @@ import { db } from "@/server/db/db";
 import { client, tasks } from "@/server/db/schema";
 import { validateRequest } from "@/server/auth/validate";
 import { generateId } from "lucia";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 
 const createSchema = z.object({
+    name: z.string(),
+    accessToken: z.string().optional(),
+});
+
+const findSchema = z.object({
+    id: z.string(),
+});
+
+const findByNameSchema = z.object({
     name: z.string(),
 });
 
@@ -19,8 +28,20 @@ export const clientRouter = createTRPCRouter({
     all: publicProcedure.query(async () => {
         return await db.query.client.findMany();
     }),
+    find: publicProcedure.input(findSchema).query(async ({ input }) => {
+        return await db.query.client.findFirst({
+            where: and(eq(client.id, input.id)),
+        });
+    }),
+    findByName: publicProcedure
+        .input(findByNameSchema)
+        .query(async ({ input }) => {
+            return await db.query.client.findFirst({
+                where: and(eq(client.name, input.name)),
+            });
+        }),
     create: publicProcedure.input(createSchema).mutation(async ({ input }) => {
-        const { user } = await validateRequest();
+        const { user } = await validateRequest(input.accessToken);
 
         if (!user) {
             throw new Error("Not auth");
@@ -36,10 +57,13 @@ export const clientRouter = createTRPCRouter({
             throw new Error("Client already exists");
         }
 
-        await db.insert(client).values({
-            id,
-            name: input.name.toLowerCase(),
-        });
+        return await db
+            .insert(client)
+            .values({
+                id,
+                name: input.name.toLowerCase(),
+            })
+            .returning();
     }),
     delete: publicProcedure.input(deleteSchema).mutation(async ({ input }) => {
         const { user } = await validateRequest();
