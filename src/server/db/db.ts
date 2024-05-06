@@ -21,7 +21,10 @@ const globalForDb = globalThis as unknown as {
 };
 
 export const conn = globalForDb.conn ?? postgres(env.DATABASE_URL);
-if (env.NODE_ENV !== "production") globalForDb.conn = conn;
+
+if (env.NODE_ENV !== "production") {
+    globalForDb.conn = conn;
+}
 
 const logger = new DefaultLogger({ writer: new MyLogWriter() });
 

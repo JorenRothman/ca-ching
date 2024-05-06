@@ -7,9 +7,9 @@
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
-        "drizzle:generate": "drizzle-kit generate:pg",
-        "drizzle:migrate": "pnpx tsx src/migrate.ts",
-        "studio": "pnpm drizzle-kit studio",
+        "db:generate": "drizzle-kit generate:pg",
+        "db:migrate": "pnpx tsx src/migrate.ts",
+        "db:view": "pnpm drizzle-kit studio",
         "secret:generate": "openssl rand -base64 32"
     },
     "dependencies": {
