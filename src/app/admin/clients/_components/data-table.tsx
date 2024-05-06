@@ -27,7 +27,6 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { PlusCircle } from "lucide-react";
 import AddClientForm from "@/app/admin/clients/_components/addClientForm";
-import { Title } from "@radix-ui/react-dialog";
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];

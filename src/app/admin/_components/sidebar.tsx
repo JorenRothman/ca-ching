@@ -1,6 +1,6 @@
 "use client";
 
-import { Settings, CircleCheck, Handshake, LockOpen } from "lucide-react";
+import { CircleCheck, Handshake, LockOpen } from "lucide-react";
 
 import {
     Tooltip,

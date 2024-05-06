@@ -15,7 +15,6 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];

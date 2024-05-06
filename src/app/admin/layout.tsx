@@ -1,17 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import {
-    Home,
-    LineChart,
-    Package,
-    Package2,
     PanelLeft,
-    Settings,
-    ShoppingCart,
     CircleCheck,
-    GanttChart,
-    User2,
     Handshake,
     LockOpen,
 } from "lucide-react";
@@ -28,12 +19,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from "@/components/ui/tooltip";
+
+
 export const metadata: Metadata = {
     title: "Ca Ching",
     description: "A simple budgeting app",

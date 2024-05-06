@@ -1,5 +1,4 @@
 import { validateRequestPage } from "@/server/auth/validate";
-import AddClientForm from "@/app/admin/clients/_components/addClientForm";
 import { DataTable } from "@/app/admin/clients/_components/data-table";
 import { columns } from "@/app/admin/clients/_components/columns";
 import { api } from "@/trpc/server";

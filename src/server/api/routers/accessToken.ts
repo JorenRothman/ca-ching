@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 import { db } from "@/server/db/db";
-import { accessToken, users } from "@/server/db/schema";
+import { accessToken } from "@/server/db/schema";
 import { validateRequest } from "@/server/auth/validate";
 import { generateId } from "lucia";
 import { and, eq } from "drizzle-orm";
