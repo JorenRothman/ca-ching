@@ -26,5 +26,5 @@ export default function DashboardTitle() {
         return <h2></h2>;
     }
 
-    return <h2 className="text-xl">{title}</h2>;
+    return <h2 className="text-2xl">{title}</h2>;
 }

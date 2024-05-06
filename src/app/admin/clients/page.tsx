@@ -10,8 +10,7 @@ export default async function Home() {
     const clients = await api.client.all();
 
     return (
-        <div className="space-y-8">
-            <AddClientForm />
+        <div className="grid flex-1 items-start gap-4 p-4 sm:px-0 sm:py-0 md:gap-8">
             <DataTable columns={columns} data={clients} />
         </div>
     );

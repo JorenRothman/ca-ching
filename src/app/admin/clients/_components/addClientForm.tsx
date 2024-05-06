@@ -31,7 +31,11 @@ const formSchema = z.object({
     name: z.string().min(2).max(50),
 });
 
-export default function AddClientForm() {
+type Props = {
+    onSuccess: () => void;
+};
+
+export default function AddClientForm({ onSuccess }: Props) {
     const router = useRouter();
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -47,6 +51,8 @@ export default function AddClientForm() {
             form.reset();
 
             toast.success("Client added");
+
+            onSuccess();
         },
         onError: (error) => {
             toast(error.message);
@@ -58,36 +64,26 @@ export default function AddClientForm() {
     }
 
     return (
-        <Card>
-            <CardHeader>
-                <CardTitle className="text-2xl">Add Client</CardTitle>
-            </CardHeader>
-            <CardContent>
-                <Form {...form}>
-                    <form
-                        onSubmit={form.handleSubmit(onSubmit)}
-                        className="space-y-8"
-                    >
-                        <FormField
-                            control={form.control}
-                            name="name"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Name</FormLabel>
-                                    <FormControl>
-                                        <Input placeholder="" {...field} />
-                                    </FormControl>
-                                    <FormDescription>
-                                        Name of the client
-                                    </FormDescription>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <Button type="submit">Submit</Button>
-                    </form>
-                </Form>
-            </CardContent>
-        </Card>
+        <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Name</FormLabel>
+                            <FormControl>
+                                <Input placeholder="" {...field} />
+                            </FormControl>
+                            <FormDescription>
+                                Name of the client
+                            </FormDescription>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <Button type="submit">Submit</Button>
+            </form>
+        </Form>
     );
 }

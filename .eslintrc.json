@@ -1,9 +1,10 @@
 {
     "extends": ["next/core-web-vitals"],
-    "plugins": ["svg-jsx"],
+    "plugins": ["svg-jsx", "unused-imports"],
     "rules": {
         "svg-jsx/camel-case-dash": "error",
         "svg-jsx/camel-case-colon": "error",
-        "svg-jsx/no-style-string": "error"
+        "svg-jsx/no-style-string": "error",
+        "unused-imports/no-unused-imports": "error"
     }
 }
