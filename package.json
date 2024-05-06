@@ -12,6 +12,8 @@
         "db:generate": "drizzle-kit generate:pg",
         "db:migrate": "pnpx tsx src/migrate.ts",
         "db:view": "pnpm drizzle-kit studio",
+        "env:up": "docker compose up -d",
+        "env:down": "docker compose down",
         "secret:generate": "openssl rand -base64 32"
     },
     "dependencies": {
