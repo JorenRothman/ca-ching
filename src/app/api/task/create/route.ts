@@ -15,7 +15,7 @@ export async function POST(request: Request) {
             { message: input.error.issues },
             {
                 status: 500,
-            }
+            },
         );
     }
 
@@ -39,7 +39,7 @@ export async function POST(request: Request) {
             },
             {
                 status: 500,
-            }
+            },
         );
     }
 

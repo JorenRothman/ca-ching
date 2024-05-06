@@ -1,11 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import {
-    PanelLeft,
-    CircleCheck,
-    Handshake,
-    LockOpen,
-} from "lucide-react";
+import { PanelLeft, CircleCheck, Handshake, LockOpen } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -18,8 +13,6 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-
-
 
 export const metadata: Metadata = {
     title: "Ca Ching",

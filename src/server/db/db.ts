@@ -33,5 +33,5 @@ export const db = drizzle(conn, { schema, logger });
 export const adapter = new DrizzlePostgreSQLAdapter(
     db,
     schema.sessions,
-    schema.users
+    schema.users,
 );

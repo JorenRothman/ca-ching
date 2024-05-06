@@ -16,7 +16,7 @@ export async function createJWT<T extends jose.JWTPayload>(payload: T) {
 }
 
 export async function verifyJWT<T>(
-    token: string
+    token: string,
 ): Promise<jose.JWTVerifyResult<T>> {
     return await jose.jwtVerify(token, secret);
 }

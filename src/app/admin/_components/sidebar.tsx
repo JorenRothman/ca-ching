@@ -29,7 +29,7 @@ export default function Sidebar() {
                                     {
                                         "bg-accent text-accent-foreground":
                                             pathname === "/admin",
-                                    }
+                                    },
                                 )}
                             >
                                 <DashboardIcon className="h-5 w-5" />
@@ -47,7 +47,7 @@ export default function Sidebar() {
                                     {
                                         "bg-accent text-accent-foreground":
                                             pathname === "/admin/tasks",
-                                    }
+                                    },
                                 )}
                             >
                                 <CircleCheck className="h-5 w-5" />
@@ -65,7 +65,7 @@ export default function Sidebar() {
                                     {
                                         "bg-accent text-accent-foreground":
                                             pathname === "/admin/clients",
-                                    }
+                                    },
                                 )}
                             >
                                 <Handshake className="h-5 w-5" />
@@ -87,7 +87,7 @@ export default function Sidebar() {
                                     {
                                         "bg-accent text-accent-foreground":
                                             pathname === "/admin/access-token",
-                                    }
+                                    },
                                 )}
                             >
                                 <LockOpen className="h-5 w-5" />

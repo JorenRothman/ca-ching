@@ -36,13 +36,13 @@ export const columns: ColumnDef<Client>[] = [
                     router.refresh();
 
                     toast.success(
-                        `${clients.shift()?.name} successfully deleted!`
+                        `${clients.shift()?.name} successfully deleted!`,
                     );
                 },
                 onError: ({ data, message }) => {
                     if (message.includes("violates foreign key constraint")) {
                         return toast.error(
-                            "Unable to delete client. Please remove all attached tasks"
+                            "Unable to delete client. Please remove all attached tasks",
                         );
                     }
 

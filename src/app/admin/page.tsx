@@ -15,7 +15,7 @@ export default async function Page() {
 
     const minutesTracked = tasks.reduce(
         (prev, current) => prev + current.duration,
-        0
+        0,
     );
 
     return (

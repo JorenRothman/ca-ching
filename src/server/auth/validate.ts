@@ -9,14 +9,13 @@ import type { AccessTokenPayload } from "@/server/api/routers/accessToken";
 
 export const validateRequest = cache(
     async (
-        accessToken = ""
+        accessToken = "",
     ): Promise<
         { user: User; session: Session } | { user: null; session: null }
     > => {
         if (accessToken) {
-            const { payload } = await verifyJWT<AccessTokenPayload>(
-                accessToken
-            );
+            const { payload } =
+                await verifyJWT<AccessTokenPayload>(accessToken);
 
             return {
                 user: {
@@ -46,12 +45,12 @@ export const validateRequest = cache(
         try {
             if (result.session && result.session.fresh) {
                 const sessionCookie = lucia.createSessionCookie(
-                    result.session.id
+                    result.session.id,
                 );
                 cookies().set(
                     sessionCookie.name,
                     sessionCookie.value,
-                    sessionCookie.attributes
+                    sessionCookie.attributes,
                 );
             }
             if (!result.session) {
@@ -59,13 +58,13 @@ export const validateRequest = cache(
                 cookies().set(
                     sessionCookie.name,
                     sessionCookie.value,
-                    sessionCookie.attributes
+                    sessionCookie.attributes,
                 );
             }
         } catch {}
 
         return result;
-    }
+    },
 );
 
 export const validateRequestPage = async () => {
