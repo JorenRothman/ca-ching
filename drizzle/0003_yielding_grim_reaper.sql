@@ -1,1 +1,0 @@
-ALTER TABLE "task" ALTER COLUMN "duration" SET NOT NULL;

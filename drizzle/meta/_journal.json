@@ -5,50 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1713126493521,
-      "tag": "0000_naive_colleen_wing",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1713384454670,
-      "tag": "0001_handy_preak",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1713385389570,
-      "tag": "0002_friendly_captain_britain",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "5",
-      "when": 1714823630907,
-      "tag": "0003_yielding_grim_reaper",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "5",
-      "when": 1714854202126,
-      "tag": "0004_harsh_viper",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "5",
-      "when": 1714900591112,
-      "tag": "0005_big_black_crow",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "5",
-      "when": 1714911446755,
-      "tag": "0006_unique_imperial_guard",
+      "when": 1715025261587,
+      "tag": "0000_omniscient_morg",
       "breakpoints": true
     }
   ]

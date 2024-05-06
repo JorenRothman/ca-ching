@@ -1,1 +1,0 @@
-ALTER TABLE "access_token" ADD COLUMN "date" timestamp DEFAULT now() NOT NULL;
