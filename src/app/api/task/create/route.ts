@@ -1,6 +1,5 @@
 import { createTaskSchema } from "@/shared/schemas/task";
 import { api } from "@/trpc/server";
-import { z } from "zod";
 
 export const dynamic = "force-dynamic";
 
@@ -20,10 +19,17 @@ export async function POST(request: Request) {
         );
     }
 
-    let client = await api.client.findByName({ name: input.data.client });
+    let client = await api.client.findByName({
+        name: input.data.client,
+    });
 
     if (!client) {
-        client = (await api.client.create({ name: input.data.client })).shift();
+        client = (
+            await api.client.create({
+                name: input.data.client,
+                accessToken: token,
+            })
+        ).shift();
     }
 
     if (!client) {
